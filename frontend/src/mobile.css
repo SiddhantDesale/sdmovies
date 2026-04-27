@@ -1,0 +1,108 @@
+/* 📱 MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  /* LOGO */
+  .logo {
+    font-size: 24px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  /* NAVBAR */
+  .navbar-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .navbar-left {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 5px;
+  }
+
+  /* hide scrollbar (optional) */
+  .navbar-left::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* BUTTONS */
+  .nav-btn,
+  .home-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .home-btn {
+    display: flex;
+    align-items: center;
+  }
+
+  /* SEARCH */
+  .search-container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-container input {
+    width: 70%;
+    font-size: 14px;
+  }
+
+  .search-container button {
+    font-size: 14px;
+  }
+
+  /* GRID */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .movie-card {
+    transition: none; /* remove hover zoom on mobile */
+  }
+
+  /* MOVIE CARD TEXT */
+  .movie-info h3 {
+    font-size: 12px;
+  }
+
+  .movie-info p {
+    font-size: 10px;
+  }
+
+  /* TITLE */
+  .section-title {
+    font-size: 18px;
+    align-items: center;
+  }
+
+  .section-title svg {
+    font-size: 25px;
+    vertical-align: bottom;
+  }
+
+  /* DROPDOWN */
+
+  .dropdown-btn {
+    background: red;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .dropdown-content {
+    background-color: red;
+    position: absolute;
+    top: 120%;
+    left: 0%;
+    transform: translateX(-50%);
+    min-width: 140px;
+    z-index: 9999;
+  }
+
+  /* SLIDER */
+  .slider img {
+    height: 80px;
+  }
+}
