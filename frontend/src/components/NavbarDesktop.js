@@ -11,7 +11,7 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
   const dropdownRef = useRef();
   const location = useLocation();
 
-  // 🔥 CLOSE ON OUTSIDE CLICK
+  // CLOSE ON OUTSIDE CLICK
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -23,7 +23,7 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 🔥 CLOSE ON ROUTE CHANGE
+  // CLOSE ON ROUTE CHANGE
   useEffect(() => {
     setOpenDropdown(null);
   }, [location.pathname]);
@@ -31,7 +31,7 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
   return (
     <div className="navbar-container">
       <div className="navbar-left" ref={dropdownRef}>
-        {/* 🔥 NAV ITEMS */}
+        {/* NAV ITEMS */}
         {NAV_ITEMS.map((item) => (
           <span
             key={item.path}
@@ -41,7 +41,7 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
               setOpenDropdown(null);
             }}
           >
-            {item.name === "Home" ? <IoMdHome className="home-icon" /> : ""}
+            {item.name === "Home" && <IoMdHome className="home-icon" />}
             {item.name}
           </span>
         ))}

@@ -8,7 +8,7 @@ function App() {
         {/* Home */}
         <Route path="/" element={<MovieList />} />
 
-        {/* Language routes (clean names) */}
+        {/* Language routes */}
         <Route path="/language/:lang" element={<MovieList />} />
 
         {/* Genre routes */}

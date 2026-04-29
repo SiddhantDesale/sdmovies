@@ -17,7 +17,7 @@ public class DevSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors(cors -> {}) // ✅ ENABLE CORS
+            .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
@@ -26,7 +26,6 @@ public class DevSecurityConfig {
         return http.build();
     }
 
-    // ✅ CORS CONFIG
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -34,11 +33,13 @@ public class DevSecurityConfig {
 
         config.setAllowedOrigins(List.of(
             "http://localhost:3000",
-            "https://your-netlify-app.netlify.app"
+            "https://your-netlify-app.netlify.app" // replace this later
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(false);
+        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

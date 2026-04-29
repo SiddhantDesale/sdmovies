@@ -3,5 +3,5 @@ export const NAV_ITEMS = [
   { name: "Bollywood", path: "/language/bollywood" },
   { name: "Hollywood", path: "/language/hollywood" },
   { name: "Tollywood", path: "/language/tollywood" },
-  { name: "Web Series", path: "/webseries" }, // ✅ new
+  { name: "Web Series", path: "/webseries" },
 ];

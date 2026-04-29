@@ -18,7 +18,7 @@ export default function NavbarMobile({ navigate, handleSearch }) {
   const menuRef = useRef();
   const location = useLocation();
 
-  // 🔥 CLOSE ON OUTSIDE CLICK
+  // CLOSE ON OUTSIDE CLICK
   useEffect(() => {
     const handleClick = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -31,7 +31,7 @@ export default function NavbarMobile({ navigate, handleSearch }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // 🔥 CLOSE ON ROUTE CHANGE
+  // CLOSE ON ROUTE CHANGE
   useEffect(() => {
     setMenuOpen(false);
     setOpenDropdown(null);
@@ -57,14 +57,14 @@ export default function NavbarMobile({ navigate, handleSearch }) {
         {!menuOpen && <SearchBar onSearch={handleSearch} />}
       </div>
 
-      {/* 📂 SIDE MENU */}
+      {/* SIDE MENU */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`} ref={menuRef}>
         <IoMdClose className="close-icon" onClick={() => setMenuOpen(false)} />
 
         <div className="menu-content">
           <SearchBar onSearch={handleSearch} />
 
-          {/* 🔥 NAV ITEMS */}
+          {/* NAV ITEMS */}
           {NAV_ITEMS.map((item) => (
             <div
               key={item.path}

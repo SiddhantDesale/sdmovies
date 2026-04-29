@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import io.micrometer.common.lang.NonNull;
+import jakarta.annotation.PostConstruct;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -16,10 +16,17 @@ public class MovieService {
 
     @Value("${tmdb.api.key}")
     private String apiKey;
+    private static final String BASE_URL = "https://api.themoviedb.org/3";
+
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // 🔥 COMMON RETRY METHOD (CORE FIX)
+
+    @PostConstruct
+public void check() {
+    System.out.println("API KEY = " + apiKey);
+}
+
     @SuppressWarnings("unchecked")
     private Map<String, Object> fetchWithRetry( String url) {
 
@@ -32,68 +39,73 @@ public class MovieService {
                     return response;
                 }
 
-                Thread.sleep(300);
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException ignored) {}
+
 
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println("API error: " + e.getMessage());
+
             }
         }
 
         return Map.of("results", List.of());
     }
 
-    // ✅ POPULAR MOVIES
+    // POPULAR MOVIES
     public Map<String, Object> getPopularMovies() {
-        String url = "https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey;
+        String url = BASE_URL + "/movie/popular?api_key=" + apiKey;
         return fetchWithRetry(url);
     }
 
-    // ✅ WEB SERIES (FIXED WITH RETRY)
+    // WEB SERIES
     public Map<String, Object> getWebSeries() {
-        String url = "https://api.themoviedb.org/3/discover/tv?api_key=" + apiKey;
+        String url = BASE_URL +"/discover/tv?api_key=" + apiKey;
         return fetchWithRetry(url);
     }
 
-    // ✅ SEARCH
+    // SEARCH
     public Map<String, Object> searchMovies(String query) {
 
         try {
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
-            String url = "https://api.themoviedb.org/3/search/movie?api_key="
+            String url = BASE_URL + "/search/movie?api_key="
                     + apiKey + "&query=" + encodedQuery;
 
             return fetchWithRetry(url);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("API error: " + e.getMessage());
+
             return Map.of("results", List.of());
         }
     }
 
-    // ✅ LANGUAGE FILTER
+    // LANGUAGE FILTER
     public Map<String, Object> getMoviesByLanguage(String language) {
 
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key="
+        String url = BASE_URL + "/discover/movie?api_key="
                 + apiKey + "&with_original_language=" + language;
 
         return fetchWithRetry(url);
     }
 
-    // ✅ GENRE FILTER
+    // GENRE FILTER
     public Map<String, Object> getMoviesByGenre(String genreId) {
 
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key="
+        String url = BASE_URL + "/discover/movie?api_key="
                 + apiKey + "&with_genres=" + genreId;
 
         return fetchWithRetry(url);
     }
 
-    // ✅ TRAILER
+    // TRAILER
     @SuppressWarnings("unchecked")
     public String getMovieTrailer(Long movieId) {
 
-        String url = "https://api.themoviedb.org/3/movie/" + movieId + "/videos?api_key=" + apiKey;
+        String url = BASE_URL + "/movie/" + movieId + "/videos?api_key=" + apiKey;
 
         try {
             Map<String, Object> response =
@@ -129,7 +141,8 @@ public class MovieService {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("API error: " + e.getMessage());
+
         }
 
         return "NOT_FOUND";

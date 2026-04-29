@@ -1,23 +1,24 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api/movies",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   timeout: 10000,
 });
 
-// ✅ Popular
+// Popular
 export const getPopularMovies = () => API.get("/popular");
 
-// ✅ Trailer
+// Trailer
 export const getTrailer = (id) => API.get(`/${id}/trailer`);
 
-// ✅ Search
+// Search
 export const searchMovies = (query) => API.get(`/search?query=${query}`);
 
-// ✅ Language filter (FIXED)
+// Language filter
 export const getMoviesByLanguage = (lang) => API.get(`/language?lang=${lang}`);
 
-// ✅ Genre filter (FIXED)
+// Genre filter
 export const getMoviesByGenre = (genre) => API.get(`/genre?genre=${genre}`);
 
+// Web series
 export const getWebSeries = () => API.get("/webseries");

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { FaFilm, FaFolder } from "react-icons/fa";
+import { FaFolder } from "react-icons/fa";
+import logo from "../assests/logo.png";
 
 import {
   getPopularMovies,
@@ -23,6 +24,8 @@ export default function MovieList() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("Latest Releases");
   const [trailerKey, setTrailerKey] = useState(null);
+  const [error, setError] = useState(null);
+
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const requestIdRef = useRef(0);
@@ -55,6 +58,7 @@ export default function MovieList() {
     setLoading(true);
     setMovies(null);
     setTitle(newTitle);
+    setError(null);
 
     try {
       const res = await apiCall();
@@ -63,8 +67,6 @@ export default function MovieList() {
 
       setMovies(res.data?.results || []);
     } catch (err) {
-      console.log("API error:", err);
-
       if (requestId !== requestIdRef.current) return;
 
       setMovies([]);
@@ -75,11 +77,11 @@ export default function MovieList() {
     }
   };
 
-  // ROUTE HANDLER (FIXED)
+  // ROUTE HANDLER
   useEffect(() => {
     const path = location.pathname;
 
-    // ✅ WEB SERIES
+    // WEB SERIES
     if (path === "/webseries") {
       fetchMovies(getWebSeries, "Web Series");
       return;
@@ -88,13 +90,13 @@ export default function MovieList() {
     if (path.startsWith("/language/")) {
       const key = params.lang?.toLowerCase();
 
-      // ✅ FIRST: industry buttons
+      // FIRST: industry buttons
       if (industryMap[key]) {
         const obj = industryMap[key];
         fetchMovies(() => getMoviesByLanguage(obj.code), obj.name);
       }
 
-      // ✅ SECOND: dropdown languages
+      // SECOND: dropdown languages
       else if (languageMap[key]) {
         const obj = languageMap[key];
         fetchMovies(() => getMoviesByLanguage(obj.code), obj.name);
@@ -119,15 +121,17 @@ export default function MovieList() {
 
   // TRAILER
   const handleMovieClick = (id) => {
+    setError(null);
+
     getTrailer(id)
       .then((res) => {
         if (res.data === "NOT_FOUND") {
-          alert("Trailer not available 😢");
+          setError("Trailer not available 😢");
           return;
         }
         setTrailerKey(res.data);
       })
-      .catch(() => alert("Error loading trailer"));
+      .catch(() => setError("Error loading trailer"));
   };
 
   // LOADING
@@ -139,7 +143,7 @@ export default function MovieList() {
     <div>
       {/* LOGO */}
       <div className="logo" onClick={() => navigate("/")}>
-        SDMovies <FaFilm />
+        <img src={logo} alt="SDMovies" className="logo-img" />{" "}
       </div>
 
       {/* Slider */}
@@ -157,6 +161,9 @@ export default function MovieList() {
       <h2 className="section-title">
         <FaFolder color="white" /> {title}
       </h2>
+
+      {/* ERROR MESSAGE */}
+      {error && <div className="error-message">{error}</div>}
 
       {/* MOVIES */}
       {movies.length === 0 ? (

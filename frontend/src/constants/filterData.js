@@ -1,4 +1,4 @@
-// 🎬 GENRES
+// GENRES
 export const GENRES = [
   { key: "romantic", id: "10749", name: "Romantic" },
   { key: "action", id: "28", name: "Action" },
@@ -8,7 +8,7 @@ export const GENRES = [
   { key: "animation", id: "16", name: "Animation" },
 ];
 
-// 🌍 LANGUAGES
+// LANGUAGES
 export const LANGUAGES = [
   { key: "hindi", code: "hi", name: "Hindi" },
   { key: "english", code: "en", name: "English" },

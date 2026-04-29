@@ -1,4 +1,4 @@
-/* 🔥 GLOBAL */
+/* GLOBAL */
 body {
   margin: 0;
   background-color: #000;
@@ -6,22 +6,18 @@ body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-/* 🔥 LOGO */
-.logo {
-  font-size: 36px;
-  font-weight: bold;
-  padding: 20px;
+.logo-img {
+  height: 80px;
+  padding: 3px 20px;
   cursor: pointer;
-  letter-spacing: 1px;
+  transition: transform 0.3s ease;
 }
 
-.logo svg {
-  margin-left: 8px;
-  font-size: 35px;
-  vertical-align: middle;
+.logo-img:hover {
+  transform: scale(1.05);
 }
 
-/* 🔥 SLIDER */
+/* SLIDER */
 .slider {
   overflow: hidden;
   width: 100%;
@@ -49,7 +45,7 @@ body {
   }
 }
 
-/* 🔥 NAVBAR DESKTOP */
+/* NAVBAR DESKTOP */
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -64,7 +60,7 @@ body {
   gap: 50px;
 }
 
-/* 🔥 HOME BUTTON */
+/* HOME BUTTON */
 .home-btn {
   background-color: #ffc107;
   color: black;
@@ -92,7 +88,7 @@ body {
   transform: scale(1.1) rotate(-10deg);
 }
 
-/* 🔥 NAV BUTTONS */
+/* NAV BUTTONS */
 .nav-btn {
   cursor: pointer;
   font-size: 20px;
@@ -105,7 +101,7 @@ body {
   border-radius: 5px;
 }
 
-/* 🔥 DROPDOWN */
+/* DROPDOWN */
 .dropdown {
   position: relative;
 }
@@ -140,7 +136,7 @@ body {
   background: #333;
 }
 
-/* 🔥 SEARCH */
+/* SEARCH */
 .search-container {
   display: flex;
 }
@@ -161,7 +157,7 @@ body {
   border-radius: 0 5px 5px 0;
 }
 
-/* 🔥 TITLE */
+/* TITLE */
 .section-title {
   margin: 20px;
   font-size: 22px;
@@ -170,7 +166,14 @@ body {
   gap: 8px;
 }
 
-/* 🔥 GRID */
+.error-message {
+  text-align: center;
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -178,7 +181,7 @@ body {
   padding: 20px;
 }
 
-/* 🔥 MOVIE CARD */
+/* MOVIE CARD */
 .movie-card {
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -193,7 +196,7 @@ body {
   transform: scale(1.08);
 }
 
-/* 🔥 LOADER */
+/* LOADER */
 .loader {
   border: 5px solid #ccc;
   border-top: 5px solid #e50914;
@@ -211,11 +214,11 @@ body {
 }
 
 /* ===================================================== */
-/* 📱 MOBILE VIEW (MAIN FEATURE) */
+/* MOBILE VIEW */
 /* ===================================================== */
 
 @media (max-width: 1000px) {
-  /* 🔥 HIDE DESKTOP NAV */
+  /* HIDE DESKTOP NAV */
   .navbar-container {
     display: none;
   }
@@ -226,7 +229,7 @@ body {
     justify-content: center;
   }
 
-  /* 🔥 TOP BAR */
+  /* TOP BAR */
   .mobile-topbar {
     display: flex;
     justify-content: space-between;
@@ -258,7 +261,7 @@ body {
     margin-bottom: 1px;
   }
 
-  /* 🔥 SEARCH SMALL */
+  /* SEARCH SMALL */
   .search-container input {
     width: 140px;
     font-size: 12px;
@@ -268,7 +271,7 @@ body {
     font-size: 12px;
   }
 
-  /* 🔥 SIDE MENU */
+  /* SIDE MENU */
   .side-menu {
     position: fixed;
     top: 0;
@@ -309,7 +312,7 @@ body {
     color: #ccc;
   }
 
-  /* 🔥 GRID MOBILE */
+  /* GRID MOBILE */
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -320,12 +323,19 @@ body {
     transform: none;
   }
 
-  /* 🔥 TITLE */
+  /* TITLE */
   .section-title {
     font-size: 18px;
   }
 
-  /* 🔥 SLIDER */
+  .error-message {
+    text-align: center;
+    color: #ff4d4d;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  /* SLIDER */
   .slider img {
     height: 80px;
   }
