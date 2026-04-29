@@ -33,7 +33,7 @@ public class DevSecurityConfig {
 
         config.setAllowedOrigins(List.of(
             "http://localhost:3000",
-            "https://your-netlify-app.netlify.app" // replace this later
+            "https://sdmovies-siddhant.netlify.app"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
