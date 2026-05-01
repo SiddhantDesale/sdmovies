@@ -4,10 +4,10 @@ A full-stack movie browsing web application built using **React (Frontend)** and
 The app allows users to search movies, filter by genre and language, and watch trailers in a smooth, responsive UI.
 
 🔗 **Live Website:**  
-https://link-site.netlify.app
+https://sdmovies-siddhant.netlify.app
 
 🔗 **Backend API:**  
-https://link-backend.onrender.com/api/movies
+https://sdmovies.onrender.com/api/movies
 
 ---
 
@@ -22,3 +22,60 @@ https://link-backend.onrender.com/api/movies
 - ⚡ Fast and smooth performance
 
 ---
+
+## 🛠️ Tech Stack
+
+**Frontend**
+
+- React.js
+- JavaScript
+- CSS
+- React Router
+
+**Backend**
+
+- Spring Boot (Java)
+- REST APIs
+
+**Deployment**
+
+- Netlify (Frontend)
+- Render (Backend)
+
+**API**
+
+- TMDB (The Movie Database)
+
+---
+
+## 🧠 How It Works
+
+1. User interacts with frontend (React UI)
+2. Frontend sends request to backend API
+3. Backend fetches data from TMDB API
+4. Trailer and movie data is returned and displayed
+
+---
+
+## ⚙️ Running the Project Locally
+
+### Backend (Spring Boot)
+
+```bash
+cd backend
+./mvnw spring-boot:run
+```
+
+API runs on:
+https://sdmovies.onrender.com/api/movies
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+App runs on:
+http://localhost:3000
+or check
+https://sdmovies-siddhant.netlify.app
