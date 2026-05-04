@@ -33,7 +33,8 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
       <div className="navbar-left" ref={dropdownRef}>
         {/* NAV ITEMS */}
         {NAV_ITEMS.map((item) => (
-          <span
+          <button
+            type="button"
             key={item.path}
             className={item.name === "Home" ? "home-btn" : "nav-btn"}
             onClick={() => {
@@ -43,7 +44,7 @@ export default function NavbarDesktop({ navigate, handleSearch }) {
           >
             {item.name === "Home" && <IoMdHome className="home-icon" />}
             {item.name}
-          </span>
+          </button>
         ))}
 
         {/* GENRES */}

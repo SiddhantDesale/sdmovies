@@ -1,9 +1,45 @@
 /* GLOBAL */
+* {
+  box-sizing: border-box;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
 body {
   margin: 0;
   background-color: #000;
   color: white;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid #e50914;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.nav-btn,
+.home-btn,
+.mobile-nav-btn,
+.submenu,
+.movie-click {
+  user-select: none;
+}
+
+button,
+.nav-btn,
+.home-btn,
+.dropdown-btn,
+.movie-click {
+  outline: none;
 }
 
 .logo-img {
@@ -90,7 +126,6 @@ body {
 
 /* NAV BUTTONS */
 .nav-btn {
-  cursor: pointer;
   font-size: 20px;
   padding: 5px 10px;
   transition: 0.3s;
@@ -99,6 +134,7 @@ body {
 .nav-btn:hover {
   background-color: #333;
   border-radius: 5px;
+  transform: translateY(-2px);
 }
 
 /* DROPDOWN */
@@ -166,13 +202,6 @@ body {
   gap: 8px;
 }
 
-.error-message {
-  text-align: center;
-  color: #ff4d4d;
-  margin-top: 10px;
-  font-weight: 500;
-}
-
 /* GRID */
 .grid {
   display: grid;
@@ -185,6 +214,7 @@ body {
 .movie-card {
   cursor: pointer;
   transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .movie-card img {
@@ -227,6 +257,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .mobile-nav-btn {
+    width: 100%;
+    text-align: left;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    font-size: 16px;
   }
 
   /* TOP BAR */
@@ -288,6 +326,16 @@ body {
     left: 0;
   }
 
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+  }
+
   .arrow-icon {
     margin-left: 1px;
     font-size: 15px;
@@ -301,15 +349,24 @@ body {
   }
 
   .menu-content div {
+    display: block;
+    width: 100%;
     padding: 12px 0;
     border-bottom: 1px solid #333;
     cursor: pointer;
   }
 
   .submenu {
-    padding-left: 15px;
+    display: block;
+    width: 100%;
+    padding: 10px 0 10px 20px;
     font-size: 14px;
     color: #ccc;
+    border-bottom: 1px solid #333;
+  }
+
+  .submenu:hover {
+    background-color: #2a2a2a;
   }
 
   /* GRID MOBILE */
@@ -326,13 +383,6 @@ body {
   /* TITLE */
   .section-title {
     font-size: 18px;
-  }
-
-  .error-message {
-    text-align: center;
-    color: #ff4d4d;
-    margin-top: 10px;
-    font-weight: 500;
   }
 
   /* SLIDER */

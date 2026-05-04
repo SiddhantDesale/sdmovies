@@ -57,6 +57,17 @@ export default function NavbarMobile({ navigate, handleSearch }) {
         {!menuOpen && <SearchBar onSearch={handleSearch} />}
       </div>
 
+      {/* OVERLAY */}
+      {menuOpen && (
+        <div
+          className="menu-overlay"
+          onClick={() => {
+            setMenuOpen(false);
+            setOpenDropdown(null);
+          }}
+        />
+      )}
+
       {/* SIDE MENU */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`} ref={menuRef}>
         <IoMdClose className="close-icon" onClick={() => setMenuOpen(false)} />
@@ -66,29 +77,33 @@ export default function NavbarMobile({ navigate, handleSearch }) {
 
           {/* NAV ITEMS */}
           {NAV_ITEMS.map((item) => (
-            <div
+            <button
               key={item.path}
+              type="button"
+              className="mobile-nav-btn"
               onClick={() => {
                 navigate(item.path);
                 setMenuOpen(false);
               }}
             >
               {item.name}
-            </div>
+            </button>
           ))}
 
           {/* GENRES */}
-          <div
+          <button
+            type="button"
+            className="mobile-nav-btn"
             onClick={() =>
               setOpenDropdown(openDropdown === "genre" ? null : "genre")
             }
           >
             Genres <IoMdArrowDropdown className="arrow-icon" />
-          </div>
+          </button>
 
           {openDropdown === "genre" &&
             GENRES.map((g) => (
-              <div
+              <button
                 key={g.key}
                 className="submenu"
                 onClick={() => {
@@ -97,21 +112,23 @@ export default function NavbarMobile({ navigate, handleSearch }) {
                 }}
               >
                 {g.name}
-              </div>
+              </button>
             ))}
 
           {/* LANGUAGES */}
-          <div
+          <button
+            type="button"
+            className="mobile-nav-btn"
             onClick={() =>
               setOpenDropdown(openDropdown === "language" ? null : "language")
             }
           >
             Languages <IoMdArrowDropdown className="arrow-icon" />
-          </div>
+          </button>
 
           {openDropdown === "language" &&
             LANGUAGES.map((l) => (
-              <div
+              <button
                 key={l.key}
                 className="submenu"
                 onClick={() => {
@@ -120,7 +137,7 @@ export default function NavbarMobile({ navigate, handleSearch }) {
                 }}
               >
                 {l.name}
-              </div>
+              </button>
             ))}
         </div>
       </div>

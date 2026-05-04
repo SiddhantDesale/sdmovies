@@ -24,7 +24,6 @@ export default function MovieList() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("Latest Releases");
   const [trailerKey, setTrailerKey] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(null);
 
   const [error, setError] = useState(null);
   const [slowLoading, setSlowLoading] = useState(false);
@@ -34,6 +33,9 @@ export default function MovieList() {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const trailerId = queryParams.get("trailer");
 
   // INDUSTRY (buttons)
   const industryMap = {
@@ -90,7 +92,16 @@ export default function MovieList() {
 
   // ROUTE HANDLER
   useEffect(() => {
+    setError(null);
+
     const path = location.pathname;
+
+    // SEARCH ROUTE
+    if (path.startsWith("/search/")) {
+      const query = decodeURIComponent(params.query || "");
+      fetchMovies(() => searchMovies(query), `Search: ${query}`);
+      return;
+    }
 
     // WEB SERIES
     if (path === "/webseries") {
@@ -98,6 +109,7 @@ export default function MovieList() {
       return;
     }
 
+    // Language
     if (path.startsWith("/language/")) {
       const key = params.lang?.toLowerCase();
 
@@ -112,6 +124,8 @@ export default function MovieList() {
         const obj = languageMap[key];
         fetchMovies(() => getMoviesByLanguage(obj.code), obj.name);
       }
+
+      // Genre
     } else if (path.startsWith("/genre/")) {
       const key = params.genre?.toLowerCase();
       const genreObj = genreMap[key];
@@ -119,6 +133,8 @@ export default function MovieList() {
       if (genreObj) {
         fetchMovies(() => getMoviesByGenre(genreObj.id), genreObj.name);
       }
+
+      // Default
     } else {
       fetchMovies(getPopularMovies, "Latest Releases");
     }
@@ -131,30 +147,60 @@ export default function MovieList() {
   // SEARCH
   const handleSearch = (query) => {
     if (!query.trim()) return;
-    fetchMovies(() => searchMovies(query), `Search: ${query}`);
+    navigate(`/search/${encodeURIComponent(query)}`);
   };
 
-  // TRAILER
-  const handleMovieClick = (id) => {
-    setError(null);
+  // HANDLED TRAILER FROM URL
+  useEffect(() => {
+    if (!trailerId) {
+      setTrailerKey(null);
+      setError(null);
+      return;
+    }
 
-    getTrailer(id)
+    getTrailer(trailerId)
       .then((res) => {
         if (res.data === "NOT_FOUND") {
           setError("Trailer not available 😢");
+          setTrailerKey(null);
           return;
         }
+        setError(null);
         setTrailerKey(res.data);
       })
-      .catch(() => setError("Error loading trailer"));
+      .catch(() => {
+        setError("Error loading trailer");
+        setTrailerKey(null);
+      });
+  }, [trailerId]);
+
+  // CLICK MOVIE (Trailer)
+  const handleMovieClick = (id) => {
+    navigate(`${location.pathname}?trailer=${id}`);
   };
+
+  // CLOSE TRAILER
+  const closeTrailer = () => {
+    setError(null);
+    navigate(location.pathname);
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (trailerId) {
+        setTrailerKey(null);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [trailerId]);
 
   // LOADING
   if (loading || movies === null) {
     return (
       <div style={{ textAlign: "center", marginTop: "60px" }}>
         <div className="loader"></div>
-
         <h3 style={{ marginTop: "20px", color: "#aaa" }}>
           {slowLoading ? "Server is starting... please wait ⏳" : "Loading..."}
         </h3>
@@ -165,20 +211,15 @@ export default function MovieList() {
   return (
     <div>
       {/* LOGO */}
-      <div className="logo" onClick={() => navigate("/")}>
+      <button className="logo" onClick={() => navigate("/")}>
         <img src={logo} alt="SDMovies" className="logo-img" />{" "}
-      </div>
+      </button>
 
       {/* Slider */}
       <MovieSlider />
 
       {/* Navbar */}
-      <Navbar
-        navigate={navigate}
-        openDropdown={openDropdown}
-        setOpenDropdown={setOpenDropdown}
-        handleSearch={handleSearch}
-      />
+      <Navbar navigate={navigate} handleSearch={handleSearch} />
 
       {/* TITLE */}
       <h2 className="section-title">
@@ -193,7 +234,14 @@ export default function MovieList() {
       ) : (
         <div className="grid">
           {movies.map((movie) => (
-            <div key={movie.id} onClick={() => handleMovieClick(movie.id)}>
+            <div
+              key={movie.id}
+              className="movie-click"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleMovieClick(movie.id)}
+              onKeyDown={(e) => e.key === "Enter" && handleMovieClick(movie.id)}
+            >
               <MovieCard movie={movie} />
             </div>
           ))}
@@ -201,10 +249,7 @@ export default function MovieList() {
       )}
 
       {/* Trailer */}
-      <TrailerModal
-        trailerKey={trailerKey}
-        onClose={() => setTrailerKey(null)}
-      />
+      <TrailerModal trailerKey={trailerKey} onClose={closeTrailer} />
     </div>
   );
 }

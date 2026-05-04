@@ -7,7 +7,7 @@ The app allows users to search movies, filter by genre and language, and watch t
 https://sdmovies-siddhant.netlify.app
 
 🔗 **Backend API:**  
-https://sdmovies.onrender.com/api/movies
+https://sdmovies.onrender.com/api/movies/popular
 
 ---
 
@@ -67,7 +67,7 @@ cd backend
 ```
 
 API runs on:
-https://sdmovies.onrender.com/api/movies
+https://sdmovies.onrender.com/api/movies/popular
 
 ```bash
 cd frontend

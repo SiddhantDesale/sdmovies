@@ -16,6 +16,9 @@ function App() {
 
         {/* Webseries routes */}
         <Route path="/webseries" element={<MovieList />} />
+
+        {/* Search routes */}
+        <Route path="/search/:query" element={<MovieList />} />
       </Routes>
     </Router>
   );
