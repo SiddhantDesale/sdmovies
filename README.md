@@ -49,21 +49,13 @@ https://sdmovies.onrender.com/api/movies/popular
 
 # 📱 Mobile View
 
-## Mobile Home
+| Home                                                   | Search                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------- |
+| <img src="./screenshots/mobile-home.jpg" width="250"/> | <img src="./screenshots/mobile-side-menu.jpg" width="250"/> |
 
-![Mobile Home](./screenshots/mobile-home.jpg)
-
-## Mobile Menu
-
-![Mobile Menu](./screenshots/mobile-side-menu.jpg)
-
-## Mobile Trailer
-
-![Mobile Trailer](./screenshots/mobile-trailer.jpg)
-
-## Mobile Trailer View
-
-![Mobile Trailer View](./screenshots/mobile-trailer-view.jpg)
+| Trailer                                                   | Menu                                                           |
+| --------------------------------------------------------- | -------------------------------------------------------------- |
+| <img src="./screenshots/mobile-trailer.jpg" width="250"/> | <img src="./screenshots/mobile-trailer-view.jpg" width="250"/> |
 
 ---
 
