@@ -211,9 +211,11 @@ export default function MovieList() {
   return (
     <div>
       {/* LOGO */}
-      <button className="logo" onClick={() => navigate("/")}>
-        <img src={logo} alt="SDMovies" className="logo-img" />{" "}
-      </button>
+      <div className="logo">
+        <button onClick={() => navigate("/")}>
+          <img src={logo} alt="SDMovies" className="logo-img" />{" "}
+        </button>
+      </div>
 
       {/* Slider */}
       <MovieSlider />
