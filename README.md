@@ -23,6 +23,50 @@ https://sdmovies.onrender.com/api/movies/popular
 
 ---
 
+# 📸 Screenshots
+
+---
+
+# 🖥 Desktop View
+
+## Home Page
+
+![Desktop Home](./screenshots/desktop-home.png)
+
+## Search Results
+
+![Desktop Search](./screenshots/desktop-search.png)
+
+## Trailer Modal
+
+![Desktop Trailer](./screenshots/desktop-trailer.png)
+
+## Trailer View
+
+![Desktop Trailer View](./screenshots/desktop-trailer-view.png)
+
+---
+
+# 📱 Mobile View
+
+## Mobile Home
+
+![Mobile Home](./screenshots/mobile-home.jpg)
+
+## Mobile Menu
+
+![Mobile Menu](./screenshots/mobile-side-menu.jpg)
+
+## Mobile Trailer
+
+![Mobile Trailer](./screenshots/mobile-trailer.jpg)
+
+## Mobile Trailer View
+
+![Mobile Trailer View](./screenshots/mobile-trailer-view.jpg)
+
+---
+
 ## 🛠️ Tech Stack
 
 **Frontend**
